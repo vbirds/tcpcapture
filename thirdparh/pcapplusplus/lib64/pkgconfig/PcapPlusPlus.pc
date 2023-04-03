@@ -1,0 +1,10 @@
+prefix="/home/jianghz/download/PcapPlusPlus/tmp"
+libdir="/home/jianghz/download/PcapPlusPlus/tmp/lib64"
+includedir="/home/jianghz/download/PcapPlusPlus/tmp/include"
+
+Name: PcapPlusPlus
+Description: PcapPlusPlus is a multiplatform C++ library for capturing, parsing and crafting of network packets.
+URL: https://pcapplusplus.github.io/
+Version: 22.11+
+Cflags: -I${includedir}/pcapplusplus
+Libs: -L${libdir}/pcapplusplus -lPcap++ -lPacket++ -lCommon++ -lpcap -lpthread
