@@ -41,10 +41,10 @@ typedef struct __connection_data {
     timeval endTime;
 } connection_data;
 
-void init();
-void connection_start(connection_data* key);
-void connection_send(connection_data* key, const char* buffer, int len);
-void connection_recv(connection_data* key, const char* buffer, int len);
-void connection_close(connection_data* key);
-void close();
+int plugin_init();
+void plugin_connection_start(connection_data* key);
+void plugin_connection_send(connection_data* key, const char* buffer, int len);
+void plugin_connection_recv(connection_data* key, const char* buffer, int len);
+void plugin_connection_close(connection_data* key);
+void plugin_close();
 ```

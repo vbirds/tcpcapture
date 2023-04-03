@@ -165,6 +165,15 @@ int main(int argc, char* argv[])
             printf("plugin load failed rc:%d\n", rc);
             return -1;
         }
+
+        // init
+        rc = g_plugin.plugin_init();
+        if (rc != 0)
+        {
+            printf("plugin_init failed rc:%d\n", rc);
+            return -1;
+        }
+
     }
 
     std::stringstream ssFilter;

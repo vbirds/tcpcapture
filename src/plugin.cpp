@@ -4,8 +4,9 @@
 
 #include <iostream>
 
-void default_plugin_init() {
+int default_plugin_init() {
     std::cout << "default_plugin_init" << std::endl;
+    return 0;
 }
 
 void default_plugin_connection_start(connection_data *key) {
@@ -95,8 +96,7 @@ void Plugin::unload() {
 }
 
 int Plugin::plugin_init() {
-    m_init();
-    return 0;
+    return m_init();;
 }
 
 void Plugin::plugin_connection_start(connection_data *key) {
