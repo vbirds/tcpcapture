@@ -385,13 +385,17 @@ namespace cmdlineparse
                   }
               }
           }
-        if (!header.empty ())
+
+      if (!description.empty ()) {
+          ss << "    " << description;
+      }
+
+      if (!header.empty ())
           ss << header;
         ss << std::endl;
       }
 
-    if (!description.empty ())
-      ss << description << std::endl;
+
 
     help_map[group].push_back (ss.str ());
   }
@@ -476,7 +480,7 @@ namespace cmdlineparse
                           return false;
                         },
                         // Four spaces for indent (same as d_indent)
-                        _("    Print help and exit"));
+                        _("Print help and exit"));
   }
 
   inline bool
@@ -489,7 +493,7 @@ namespace cmdlineparse
                           return false;
                         },
                         // Four spaces for indent (same as d_indent)
-                        _("    Print version and exit"));
+                        _("Print version and exit"));
   }
 
   inline bool

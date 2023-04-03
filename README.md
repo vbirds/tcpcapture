@@ -5,6 +5,19 @@
 
 ### 启动参数
 
+```bash
+
+Usage: ./tcpcapture [options] ...
+
+  -h, --help    Print help and exit
+  -V, --version    Print version and exit
+  -d, --device=STRING    device name, default use first eth device
+  -i, --ip=STRING    <ip address>
+  -p, --port=STRING    <port>
+  -P, --plugin=STRING    plugin shared library name
+
+```
+
 ### 自定义插件开发
 
 支持动态库插件，plugin 需要实现下面的接口，在动态库的实现接口里解析自定义的协议。`connection_data` 在头文件 `tcpcapture.h` 中定义。
