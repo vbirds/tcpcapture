@@ -4,6 +4,7 @@ project(tcpcapture)
 set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 include_directories(${PROJECT_SOURCE_DIR}/thirdparh/spdlog/include)
@@ -22,3 +23,4 @@ endif ()
 
 
 add_subdirectory(src)
+add_subdirectory(plugins)

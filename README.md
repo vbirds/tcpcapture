@@ -23,7 +23,6 @@ Usage: ./tcpcapture [options] ...
 支持动态库插件，plugin 需要实现下面的接口，在动态库的实现接口里解析自定义的协议。`connection_data` 在头文件 `tcpcapture.h` 中定义。
 
 ```c
-
 typedef struct __connection_data {
     /** Source IP address */
     int32_t src_ip;

@@ -195,6 +195,9 @@ int main(int argc, char* argv[])
     pcpp::TcpReassembly tcpReassembly(tcp_reassembly_msg_ready_callback, nullptr, tcp_reassembly_connection_start_callback, tcp_reassembly_connection_end_callback);
 
     tcp_reassembly_loop(dev, tcpReassembly, ssFilter.str());
+    if (!plugin.empty()) {
+        g_plugin.plugin_close();
+    }
 
     return 0;
 }
