@@ -121,12 +121,14 @@ int main(int argc, char* argv[])
     std::string ip;
     std::string port;
     std::string plugin;
+    bool show = false;
     cmd.add_default();
 
     cmd.add_string('d', "device", &device, "", "device name, default use first eth device");
     cmd.add_string('i', "ip", &ip, "", "<ip address>");
     cmd.add_string('p', "port", &port, "", "<port>");
     cmd.add_string('P', "plugin", &plugin, "", "plugin shared library name");
+    cmd.add_flag('s', "show-device", &show, "", "show system device list");
 
     // Parse
     if (!cmd.parse (argc, argv))
@@ -134,6 +136,21 @@ int main(int argc, char* argv[])
         std::cout << cmd.build_usage() << std::endl;
         return 1;
     }
+
+    if (show)
+    {
+        const std::vector<pcpp::PcapLiveDevice*> & devVec= pcpp::PcapLiveDeviceList::getInstance().getPcapLiveDevicesList();
+        if (devVec.empty())
+        {
+            printf("No devices found\n");
+            return -1;
+        }
+        printf("device lists:\n");
+        for (auto dev : devVec)
+        {
+            printf("%s ip:%s\n", dev->getName().c_str(), dev->getIPv4Address().toString().c_str());
+        }
+        return 0; }
 
     if (ip.empty() && port.empty())
     {

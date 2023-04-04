@@ -92,13 +92,17 @@ void *DynamicLibMgr::GetSymbol(const char *symbolName)
 {
 #if defined(_WIN32) || defined(_WIN64)
     void* dl = GetProcAddress(m_handle, symbolName);
+    if (!dl) {
+        printf("load %s symble not found error:%s", symbolName, GetLastErrorMessage().c_str());
+        return nullptr;
+    }
 #else
     void* dl = dlsym(m_handle, symbolName);
-#endif
-
     if (!dl) {
         printf("load %s symble not found\n", symbolName);
         return nullptr;
     }
+#endif
+
     return dl;
 }

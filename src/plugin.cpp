@@ -87,12 +87,12 @@ int Plugin::load(const char *file) {
 }
 
 void Plugin::unload() {
-    m_init = default_plugin_init;
-    m_connection_start_hook = default_plugin_connection_start;
-    m_connection_send_hook = default_plugin_connection_send;
-    m_connection_recv_hook = default_plugin_connection_recv;
-    m_connection_close_hook = default_plugin_connection_close;
-    m_close = default_plugin_close;
+    m_init = reinterpret_cast<plugin_init_hook>(default_plugin_init);
+    m_connection_start_hook = reinterpret_cast<plugin_connection_start_hook>(default_plugin_connection_start);
+    m_connection_send_hook = reinterpret_cast<plugin_connection_send_hook>(default_plugin_connection_send);
+    m_connection_recv_hook = reinterpret_cast<plugin_connection_recv_hook>(default_plugin_connection_recv);
+    m_connection_close_hook = reinterpret_cast<plugin_connection_close_hook>(default_plugin_connection_close);
+    m_close = reinterpret_cast<plugin_close_hook>(default_plugin_close);
 }
 
 int Plugin::plugin_init() {
