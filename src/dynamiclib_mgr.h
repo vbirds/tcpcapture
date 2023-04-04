@@ -1,6 +1,14 @@
 
 #pragma once
 
+#if defined(_WIN32) || defined(_WIN64)
+    #include <windows.h>
+    using Handle = HINSTANCE;
+#else
+    using Handle = void*;
+#endif
+
+
 class DynamicLibMgr
 {
 public:
@@ -21,6 +29,6 @@ public:
 
 private:
     bool m_inited;
-    void* m_handle;
+    Handle m_handle;
 
 };

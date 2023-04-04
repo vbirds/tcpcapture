@@ -5,4 +5,9 @@ if (NOT Threads_FOUND)
 endif ()
 
 add_executable(tcpcapture main.cpp dynamiclib_mgr.cpp plugin.cpp )
-target_link_libraries(tcpcapture -lPacket++  -lPcap++ -lCommon++ -lpcap Threads::Threads -ldl)
+
+if(WIN32)
+    target_link_libraries(tcpcapture Packet++ Pcap++ Common++ Packet wpcap Ws2_32 Iphlpapi Threads::Threads)
+elseif (UNIX)
+    target_link_libraries(tcpcapture -lPacket++  -lPcap++ -lCommon++ -lpcap Threads::Threads -ldl)
+endif ()

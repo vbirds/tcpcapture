@@ -13,11 +13,11 @@ void default_plugin_connection_start(connection_data *key) {
     std::cout << "default_plugin_connection_start" << std::endl;
 }
 
-void default_plugin_connection_send(connection_data *key, const char *buffer, int len) {
+void default_plugin_connection_send(connection_data *key, const char *buffer, size_t len) {
     std::cout << "default_plugin_connection_send" << std::endl;
 }
 
-void default_plugin_connection_recv(connection_data *key, const char *buffer, int len) {
+void default_plugin_connection_recv(connection_data *key, const char *buffer, size_t len) {
     std::cout << "default_plugin_connection_recv" << std::endl;
 }
 
@@ -31,12 +31,12 @@ void default_plugin_close() {
 
 
 Plugin::Plugin() {
-    m_init = default_plugin_init;
-    m_connection_start_hook = default_plugin_connection_start;
-    m_connection_send_hook = default_plugin_connection_send;
-    m_connection_recv_hook = default_plugin_connection_recv;
-    m_connection_close_hook = default_plugin_connection_close;
-    m_close = default_plugin_close;
+    m_init = reinterpret_cast<plugin_init_hook>(default_plugin_init);
+    m_connection_start_hook = reinterpret_cast<plugin_connection_start_hook>(default_plugin_connection_start);
+    m_connection_send_hook = reinterpret_cast<plugin_connection_send_hook>(default_plugin_connection_send);
+    m_connection_recv_hook = reinterpret_cast<plugin_connection_recv_hook>(default_plugin_connection_recv);
+    m_connection_close_hook = reinterpret_cast<plugin_connection_close_hook>(default_plugin_connection_close);
+    m_close = reinterpret_cast<plugin_close_hook>(default_plugin_close);
 }
 
 Plugin::~Plugin() {
@@ -103,11 +103,11 @@ void Plugin::plugin_connection_start(connection_data *key) {
     m_connection_start_hook(key);
 }
 
-void Plugin::plugin_connection_send(connection_data *key, const char *buffer, int len) {
+void Plugin::plugin_connection_send(connection_data *key, const char *buffer, size_t len) {
     m_connection_send_hook(key, buffer, len);
 }
 
-void Plugin::plugin_connection_recv(connection_data *key, const char *buffer, int len) {
+void Plugin::plugin_connection_recv(connection_data *key, const char *buffer, size_t len) {
     m_connection_recv_hook(key, buffer, len);
 }
 
