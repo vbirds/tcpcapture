@@ -14,7 +14,13 @@ if(WIN32)
     include_directories(${PROJECT_SOURCE_DIR}/thirdparh/winpcapplusplus/include)
 
     link_directories(${PROJECT_SOURCE_DIR}/thirdparh/winpcap/lib64)
-    link_directories(${PROJECT_SOURCE_DIR}/thirdparh/winpcapplusplus/lib64)
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        # Debug 模式
+        link_directories(${PROJECT_SOURCE_DIR}/thirdparh/winpcapplusplus/lib64/debug)
+    else()
+        link_directories(${PROJECT_SOURCE_DIR}/thirdparh/winpcapplusplus/lib64/release)
+    endif()
+
 elseif(UNIX)
     include_directories(${PROJECT_SOURCE_DIR}/thirdparh/pcap/include)
     include_directories(${PROJECT_SOURCE_DIR}/thirdparh/pcapplusplus/include)

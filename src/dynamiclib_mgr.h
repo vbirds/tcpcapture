@@ -2,12 +2,11 @@
 #pragma once
 
 #if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-    using Handle = HINSTANCE;
+#include <windows.h>
+using Handle = HINSTANCE;
 #else
-    using Handle = void*;
+using Handle = void*;
 #endif
-
 
 class DynamicLibMgr
 {
